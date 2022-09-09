@@ -2,8 +2,7 @@
     <form id="delete-modal" action="" wire:submit.prevent="$set('isShowModal', true)" method="post">
         <button class="px-4 py-2 rounded bg-blue-400 text-white">Delete modal?</button>
     </form>
-    @if($isShowModal)
-        <x-confirmation-modal>
+        <x-confirmation-modal class="bg-red-500">
             <x-slot name="title">
                 Are you sure?
             </x-slot>
@@ -19,5 +18,4 @@
                 {{--            <x-button class="bg-gray-400 hover:bg-gray-500">Cancel</x-button>--}}
             </x-slot:footer>
         </x-confirmation-modal>
-    @endif
 </div>

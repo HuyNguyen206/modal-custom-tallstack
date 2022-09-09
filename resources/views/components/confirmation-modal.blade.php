@@ -1,7 +1,7 @@
-<div>
+<div {{$attributes}} x-data="{show: @entangle('isShowModal')}" x-show="show" @keydown.window.esc="show = false">
     <div class="fixed inset-0 bg-gray-900 opacity-90">
     </div>
-    <div class="bg-white fixed flex flex-col h-48 inset-0 m-auto max-w-sm px-4 py-2 rounded-md shadow-md space-y-7">
+    <div @click.window.outside="show = false" class="bg-white fixed flex flex-col h-48 inset-0 m-auto max-w-sm px-4 py-2 rounded-md shadow-md space-y-7">
         <header>
             <h3 class="font-bold">
                 {{$title}}
