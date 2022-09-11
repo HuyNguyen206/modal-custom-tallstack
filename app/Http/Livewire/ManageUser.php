@@ -9,7 +9,7 @@ class ManageUser extends Component
 {
     public bool $isShowModal = false;
     public $users;
-    public $currentUserId;
+    public $currentUser;
 
     public function render()
     {
@@ -17,16 +17,16 @@ class ManageUser extends Component
         return view('livewire.manage-user')->with('users', $this->users);
     }
 
-    public function confirmDelete($userId)
+    public function confirmDelete(User $user)
     {
-        $this->currentUserId = $userId;
+        $this->currentUser = $user;
         $this->isShowModal = true;
     }
 
     public function delete()
     {
-        if ($this->currentUserId) {
-            User::find($this->currentUserId)->delete();
+        if ($this->currentUser) {
+            $this->currentUser->delete();
         }
 
         $this->isShowModal = false;

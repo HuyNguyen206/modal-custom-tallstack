@@ -44,7 +44,6 @@
                                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                     <form id="delete-modal-{{$user->id}}" action="" wire:submit.prevent="confirmDelete({{$user->id}})" method="post">
                                         <button class="px-4 py-2 rounded bg-blue-400 text-white">Delete</button>
-                                        <input type="hidden" wire:model="currentUserId">
                                     </form>
                                 </td>
                             </tr>
@@ -63,22 +62,25 @@
                         @endforelse
                         </tbody>
                     </table>
-                    <x-confirmation-modal class="bg-red-500" wire:model.defer="isShowModal">
-                        <x-slot name="title">
-                            Are you sure to delete this user?
-                        </x-slot>
-                        <x-slot:body>
-                            if you proceed, your account will be deleted forever
-                        </x-slot:body>
-                        <x-slot:footer>
-                            <x-button wire:click.prevent="delete"
-                                      class="bg-blue-400 hover:bg-blue-500 mr-2">Continue
-                            </x-button>
-                            {{--            <a href="#something-else" class = 'bg-blue-400 hover:bg-blue-500 mr-2 px-4 py-2 rounded-xl text-white transition'>Continue</a>--}}
-                            <a href="#cancel" wire:click.prevent="$set('isShowModal', false)" class='bg-gray-400 hover:bg-gray-500 px-4 py-2 rounded-xl text-white transition'>Cancel</a>
-                            {{--            <x-button class="bg-gray-400 hover:bg-gray-500">Cancel</x-button>--}}
-                        </x-slot:footer>
-                    </x-confirmation-modal>
+                    <form action="" wire:submit.prevent="delete">
+                        <x-confirmation-modal class="bg-red-500" wire:model.defer="isShowModal">
+                            <x-slot name="title">
+                                Are you sure to delete user {{optional($currentUser)->email}}?
+                            </x-slot>
+                            <x-slot:body>
+                                if you proceed, your account will be deleted forever
+                            </x-slot:body>
+                            <x-slot:footer>
+                                <x-button type="submit" wire:click.prevent="delete"
+                                          class="bg-blue-400 hover:bg-blue-500 mr-2">Continue
+                                </x-button>
+                                {{--            <a href="#something-else" class = 'bg-blue-400 hover:bg-blue-500 mr-2 px-4 py-2 rounded-xl text-white transition'>Continue</a>--}}
+                                <a href="#cancel" wire:click.prevent="$set('isShowModal', false)" class='bg-gray-400 hover:bg-gray-500 px-4 py-2 rounded-xl text-white transition'>Cancel</a>
+                                {{--            <x-button class="bg-gray-400 hover:bg-gray-500">Cancel</x-button>--}}
+                            </x-slot:footer>
+                        </x-confirmation-modal>
+                    </form>
+
                 </div>
             </div>
         </div>
